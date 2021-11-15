@@ -7,13 +7,13 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
-const redirect_to = "https://abranhe.com"
+const redirectTo = "https://abranhe.com"
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
 
 	if path == "/" {
-		w.Header().Set("Location", redirect_to)
+		w.Header().Set("Location", redirectTo)
 		w.WriteHeader(http.StatusMovedPermanently)
 		return
 	}
@@ -23,9 +23,9 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	conn, err := redis.DialURL(os.Getenv("REDIS_CONN_URL"))
-
+ 
 	if err != nil {
-		w.Header().Set("Location", redirect_to)
+		w.Header().Set("Location", redirectTo)
 		w.WriteHeader(http.StatusMovedPermanently)
 		return
 	}
@@ -35,7 +35,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 	domain, err := redis.String(conn.Do("GET", "SHORT_URL:"+path))
 
 	if err != nil {
-		w.Header().Set("Location", redirect_to)
+		w.Header().Set("Location", redirectTo)
 		w.WriteHeader(http.StatusMovedPermanently)
 		return
 	}
