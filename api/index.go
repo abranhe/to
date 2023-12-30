@@ -7,7 +7,7 @@ import (
 	"github.com/gomodule/redigo/redis"
 )
 
-const redirectTo = "https://abrahamcalf.com"
+const redirectTo = "https://abranhe.com"
 
 func Handler(w http.ResponseWriter, r *http.Request) {
 	path := r.URL.Path
